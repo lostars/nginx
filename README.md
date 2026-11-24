@@ -36,7 +36,7 @@ geoip2 /etc/nginx/geoip/GeoLite2-Country.mmdb {
 
 ## 构建和发布
 
-发布工作流在默认分支每天 03:23 UTC 执行，也可在 GitHub 的 **Actions → Publish NGINX Mainline → Run workflow** 中手动运行。每次运行从 NGINX 官网获取最新 Mainline 版本，并用仓库的 `GITHUB_TOKEN` 发布到 `ghcr.io/<owner>/<repository>`。首次发布后可在 GitHub Packages 中管理可见性和访问权限。 [工作流配置](.github/workflows/publish-nginx.yml) [NGINX 下载页](https://nginx.org/en/download.html) [GHCR 文档](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+发布工作流在默认分支每天 03:23 UTC 执行，也可在 GitHub 的 **Actions → Publish NGINX Mainline → Run workflow** 中手动运行。每次运行从 NGINX 官网获取最新 Mainline 版本，在 amd64 和 arm64 原生 runner 上并行编译。两个架构构建成功后，工作流合并并用仓库的 `GITHUB_TOKEN` 发布到 `ghcr.io/<owner>/<repository>`。首次发布后可在 GitHub Packages 中管理可见性和访问权限。 [工作流配置](.github/workflows/publish-nginx.yml) [NGINX 下载页](https://nginx.org/en/download.html) [GHCR 文档](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
 本地构建时，将 `NGINX_SOURCE_VERSION` 设置为要编译的 Mainline 版本。每次构建都会读取三个模块仓库默认分支的最新提交。Brotli 库随 `ngx_brotli` 的子模块一起获取。 [Dockerfile](Dockerfile)
 
